@@ -24,7 +24,9 @@ class YahooFinanceClient:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'YahooFinanceClient/1.0 (+https://github.com/yourrepo)'
+            'User-Agent': 'YahooFinanceClient/1.0 (+https://github.com/yourrepo)',
+            'Accept': 'application/rss+xml, application/xml;q=0.9, text/html;q=0.8, text/plain;q=0.7, */*;q=0.5',
+            'Accept-Encoding': 'identity',
         })
 
     def fetch_rss(self, url):
@@ -94,7 +96,8 @@ class YahooFinanceClient:
                             content = self.get_content_from_html(item_page)
                             article["content"] = content
                         else:
-                            article["content"] = None
+                            print(f"Failed to fetch content for article '{item.get('title', '')}'")
+                            continue
                     result.append(article)
                 except Exception as article_exc:
                     print(f"Error processing article '{item.get('title', '')}': {article_exc}")
