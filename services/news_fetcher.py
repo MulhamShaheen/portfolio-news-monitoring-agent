@@ -108,7 +108,7 @@ class YahooFinanceClient:
 
     def get_html_from_url(self, url):
         """
-        Fetch the HTML page from the URL and return the text inside the first div with class 'atoms-wrapper'.
+        Fetch the HTML page from the URL and return the text inside the first div with content block class.
         Returns None if not found or on error.
         """
         html = self.fetch_page(url)
@@ -118,7 +118,7 @@ class YahooFinanceClient:
 
     def get_content_from_html(self, html):
         """
-        Extract and return the text inside the first div with class 'atoms-wrapper' from the given HTML.
+        Extract and return the text inside the first div with content block class from the given HTML.
         Returns None if not found.
         """
         soup = BeautifulSoup(html, "html.parser")
@@ -129,7 +129,7 @@ class YahooFinanceClient:
 
 
     def fetch_news(self, ticker: str, max_articles: int = 5):
-        return self.client.get_ticker_news(ticker, count=max_articles)
+        return self.get_ticker_news(ticker, count=max_articles)
 
 
 fetcher = YahooFinanceClient()
