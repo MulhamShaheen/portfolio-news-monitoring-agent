@@ -29,3 +29,5 @@ class Summarizer:
         except Exception as e:
             print(f'Something went wrong: {e}')
             return text[:max_length] + '...'
+
+summarizer = Summarizer()
