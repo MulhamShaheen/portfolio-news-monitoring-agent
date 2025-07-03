@@ -6,7 +6,6 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 
-from data.yahoo_finance import YahooFinanceClient
 
 class YahooFinanceClient:
     """
