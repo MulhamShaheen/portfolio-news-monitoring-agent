@@ -29,3 +29,18 @@ class RelevantTickersRequest(BaseModel):
 
 class RelevantTickersResponse(BaseModel):
     symbols: List[str]
+
+class SummarizeRelevantNewsRequest(BaseModel):
+    query: str
+    top_k: int = 3
+    max_articles: int = 5
+
+
+class TickerNewsSummary(BaseModel):
+    ticker: str
+    summaries: list[SummarizedNewsItem]
+
+
+class SummarizeRelevantNewsResponse(BaseModel):
+    message: str
+    results: list[TickerNewsSummary]

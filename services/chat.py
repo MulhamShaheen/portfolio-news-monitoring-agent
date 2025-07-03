@@ -31,7 +31,6 @@ class MistralClient:
 
     def generate(
         self,
-        model: str,
         prompt: str,
         sys_prompt: Optional[str] = None,
         max_tokens: int = 100,
@@ -45,7 +44,7 @@ class MistralClient:
         """
         # mistralai expects a list of prompts for batch generation
         params = {
-            "model": model,
+            "model": self.model,
             "messages": [
                 {"role": "user", "content": prompt}
             ],
@@ -67,7 +66,6 @@ class MistralClient:
         query: str,
         tickers: List[Dict[str, str]],
         top_k: int = 3,
-        model: Optional[str] = None,
     ) -> List[str]:
         """
         Pick the most relevant tickers based on the query and ticker descriptions.
@@ -81,7 +79,6 @@ class MistralClient:
         Returns:
             List of ticker symbols (str) that are most relevant to the query
         """
-        model = model or self.model
         # Prepare the context for the LLM
         tickers_text = "\n".join(
             [f"{i+1}. {t['symbol']}: {t['description']}" for i, t in enumerate(tickers)]
@@ -96,7 +93,6 @@ class MistralClient:
             f"User query: \"{query}\"\n"
         )
         completions = self.generate(
-            model=model,
             prompt=prompt,
             sys_prompt=sys_prompt,
             max_tokens=32,
