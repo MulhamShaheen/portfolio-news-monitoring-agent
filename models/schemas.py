@@ -18,3 +18,14 @@ class NewsItem(BaseModel):
 class NewsResponse(BaseModel):
     ticker: str
     news: List[NewsItem]
+
+class TickerInput(BaseModel):
+    symbol: str
+    description: str
+
+class RelevantTickersRequest(BaseModel):
+    query: str
+    top_k: int = 3
+
+class RelevantTickersResponse(BaseModel):
+    symbols: List[str]
