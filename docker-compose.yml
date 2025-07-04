@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - ALPHAVANTAGE_API_KEY=your_alpha_vantage_api_key_here
+      - MISTRAL_API_KEY=your_mistral_api_key_here
     volumes:
       - .:/app
     restart: unless-stopped
